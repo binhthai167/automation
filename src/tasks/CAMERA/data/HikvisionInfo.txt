@@ -1,0 +1,5 @@
+FB|http://160.20.120.155|admin|TDK-2025
+FC|http://160.20.120.14|admin|1357Abcd
+FD|http://160.20.120.165|admin|TDK-2025
+FF|http://160.20.120.174|admin|TDK-2025
+F_1FL|http://160.20.120.110|admin|TDK-2025

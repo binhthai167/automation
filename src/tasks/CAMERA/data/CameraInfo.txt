@@ -1,0 +1,9 @@
+Factory A|http://14.238.89.69:8082|admin|1234abcd
+Factory B|http://14.238.89.69:8081|admin|123abc
+Factory C|http://14.238.89.69:8086|admin|123abc
+Factory D1|http://14.238.89.69:8087|admin|123abc
+Factory D2|http://14.238.89.69:8083|admin|123abc
+Factory F|http://14.238.89.69:8089|admin|123abc
+Rec 16CH|http://14.238.89.69:8084|admin|12345abc
+Hai Quan cu|http://14.238.89.69:8085|admin|123abc
+Hai Quan moi|HTTP://14.238.89.69:8090|admin|1234abcd

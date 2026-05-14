@@ -1,0 +1,59 @@
+e4:24:6c:05:30:0c
+e4:24:6c:05:32:83
+c4:7d:9f:a4:de:17
+9c:73:b1:28:1d:41
+04:2b:58:19:97:20
+00:e0:4c:28:51:13
+74:73:b4:42:40:50
+9c:9e:d5:7c:0e:a1 - POCO-X7-Pro
+d8:f8:83:51:6c:4c
+44:a8:fc:de:96:3f
+00:18:7d:dc:cd:84
+60:e3:2b:b7:e5:c1
+98:f2:b3:2f:08:e7 - ZS14850
+84:5a:3e:4f:8d:87 - Switch4F8D87
+f4:46:37:a9:1e:d3 - Laptop-Linh
+9e:cd:47:0f:d9:e0 - Galaxy-A54-5G
+ba:8c:bc:c5:33:3a - rensan-noA06
+3e:fe:33:20:7c:4c - gisong-ui-S25
+5e:74:d6:3b:c1:1d - HONOR-500
+5a:d5:42:56:35:a3 - iPhone
+76:9c:18:a2:8e:58 - POCO-X7-Pro
+ea:ef:25:1a:09:1d - Mi-11-Lite
+72:31:92:ba:ba:36 - Galaxy-A54-5G
+bc:37:d3:63:27:49 - iPhone
+f6:c3:05:72:db:9f - iPhone
+ae:9b:41:6c:7b:3f - Watch
+22:d7:a2:b5:f3:f5 - iPhone
+de:4c:56:74:5f:37 - OPPO-Reno8-Z-5G
+OPPO-Reno8-Z-5G
+30:1b:97:38:9c:d5
+16:d9:ab:00:d2:b3 - iPhone
+56:5f:74:2a:c3:4e - OPPO-Reno8-T-5G
+c2:47:b8:bf:8a:a1 
+26:f7:df:a8:4b:15 - Redmi-12
+7c:70:db:2f:2c:9f - NSVC0679
+a4:e8:8d:f9:50:78 - monitor-16CH
+f2:b9:8d:82:9f:5d
+62:e0:5d:95:25:fd - zhen-woQ3-Pro-5G
+ac:f2:3c:fd:34:ab - NIVS0921
+08:f9:7e:a2:38:19 - NIVS1163
+30:1b:97:3a:46:98
+c6:29:df:a6:f3:96 - gisong-ui-S25
+08:f9:7e:a2:4e:cf - NIVS1126
+60:e9:aa:a4:66:2b - NIVS0721
+ee:81:d6:59:f1:2a - iPhone
+08:f9:7e:a2:51:ad - NIVS1168
+48:51:c5:fc:64:f3 - LAPTOP-7UKU66QE
+92:03:96:96:d2:e0 - gisong-ui-S25
+30:1b:97:3a:3f:fb
+fa:87:fa:87:bb:f1 - Watch
+08:f9:7e:a2:26:1f - NIVS1169
+fa:ce:a2:53:27:e8 - Watch
+08:f9:7e:a2:5d:43 - NIVS1135
+08:f9:7e:a2:4a:d3 - NIVS1111
+08:f9:7e:a2:28:69 - NIVS1109
+00:62:0b:03:d7:7a - ZS15475
+30:1b:97:92:a9:5e
+30:1b:97:38:9a:a6
+30:96:fb:6f:25:c7 - Galaxy-C9-Pro

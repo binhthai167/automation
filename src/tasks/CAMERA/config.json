@@ -1,0 +1,44 @@
+{
+    "Xưởng FB": {
+        "brand": "Hikvision",
+        "ip": "160.20.120.155",
+        "username": "admin",
+        "password": "TDK-2025", 
+        "channels": {
+            "Camera Cổng Chính": "1",
+            "Camera Lắp Ráp": "2",
+            "Camera Kho Hàng": "3"
+        }
+    },
+    "Xưởng FC": {
+        "brand": "Hikvision",
+        "ip": "160.20.120.14", 
+        "username": "admin",
+        "password": "1357Abcd", 
+        "channels": {
+            "Cam Dây Chuyền": "1"
+        }
+    },
+    "Xưởng A": {
+        "brand": "Dahua",
+        "ip": "14.238.89.69:8082",
+        "username": "admin",
+        "password": "1234abcd",
+        "channels": {
+            "A1 Staff Entrance": "1",
+            "A2 F2A Phone to locker": "2",
+            "A3 CRF2 Middle": "3",
+            "A4 F2A Office": "4",
+            "A5 F2A Relax": "5",
+            "A6 F1A Relax": "6",
+            "A7 Hall": "7",
+            "A8 F1A to Locker": "8",
+            "A9 GA Office": "9",
+            "A10 F1A Warehouse": "10",
+            "A11 CRF1 before QQC": "11",
+            "A12 SA-SUS near GA": "12",
+            "A13 Parking CRF1": "13"
+
+        }
+    }
+}

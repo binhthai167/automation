@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "192.168.150.210",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "edms",
+            "name": "internal-db",
+            "username": "admin"
+        }
+    ]
+}

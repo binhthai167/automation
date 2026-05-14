@@ -1,0 +1,131 @@
+2025-10-06 08:34:52,153 - INFO - --- Starting iLO Health Check Script ---
+2025-10-06 08:34:52,155 - INFO - Loading server list from Excel file...
+2025-10-06 08:34:52,679 - INFO - Successfully loaded 13 servers from file.
+2025-10-06 08:34:52,680 - INFO - Processing server: NSVC-PQM21(SGH948VWX4)
+2025-10-06 08:34:52,681 - INFO - Connecting to iLO at 160.20.120.193 for server: NSVC-PQM21(SGH948VWX4)
+2025-10-06 08:35:01,041 - INFO - Initializing no proxy.
+2025-10-06 08:35:01,895 - INFO - Response Time to /redfish/v1: 0.8528008460998535 seconds.
+2025-10-06 08:35:01,895 - INFO - Performing session authentication.
+2025-10-06 08:35:02,103 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.20572876930236816 seconds.
+2025-10-06 08:35:02,123 - INFO - Successfully connected to iLO at 160.20.120.193
+2025-10-06 08:35:02,340 - INFO - Response Time to /redfish/v1/Views: 0.2166919708251953 seconds.
+2025-10-06 08:35:02,341 - INFO - Successfully retrieved data for NSVC-PQM21(SGH948VWX4) (160.20.120.193)
+2025-10-06 08:35:02,345 - INFO - Logging out from 160.20.120.193
+2025-10-06 08:35:02,593 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31cb18e560418: 0.24818205833435059 seconds.
+2025-10-06 08:35:02,593 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:02,595 - INFO - Processing server: NSVC-PQM22(SGH943Y0GS)
+2025-10-06 08:35:02,595 - INFO - Connecting to iLO at 160.20.120.194 for server: NSVC-PQM22(SGH943Y0GS)
+2025-10-06 08:35:02,596 - INFO - Initializing no proxy.
+2025-10-06 08:35:03,103 - INFO - Response Time to /redfish/v1: 0.507601261138916 seconds.
+2025-10-06 08:35:03,104 - INFO - Performing session authentication.
+2025-10-06 08:35:03,138 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.03323531150817871 seconds.
+2025-10-06 08:35:03,139 - INFO - Successfully connected to iLO at 160.20.120.194
+2025-10-06 08:35:03,225 - INFO - Response Time to /redfish/v1/Views: 0.08576607704162598 seconds.
+2025-10-06 08:35:03,225 - INFO - Successfully retrieved data for NSVC-PQM22(SGH943Y0GS) (160.20.120.194)
+2025-10-06 08:35:03,227 - INFO - Logging out from 160.20.120.194
+2025-10-06 08:35:03,240 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31cb9028f5c29: 0.01218414306640625 seconds.
+2025-10-06 08:35:03,240 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:03,242 - INFO - Processing server: NSVC-PQM23(SGH948VWX1)
+2025-10-06 08:35:03,243 - INFO - Connecting to iLO at 160.20.120.195 for server: NSVC-PQM23(SGH948VWX1)
+2025-10-06 08:35:03,243 - INFO - Initializing no proxy.
+2025-10-06 08:35:04,064 - INFO - Response Time to /redfish/v1: 0.8199167251586914 seconds.
+2025-10-06 08:35:04,064 - INFO - Performing session authentication.
+2025-10-06 08:35:04,283 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.21791553497314453 seconds.
+2025-10-06 08:35:04,284 - INFO - Successfully connected to iLO at 160.20.120.195
+2025-10-06 08:35:04,565 - INFO - Response Time to /redfish/v1/Views: 0.2810072898864746 seconds.
+2025-10-06 08:35:04,566 - INFO - Successfully retrieved data for NSVC-PQM23(SGH948VWX1) (160.20.120.195)
+2025-10-06 08:35:04,568 - INFO - Logging out from 160.20.120.195
+2025-10-06 08:35:04,768 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31cb4a24dd2f1: 0.2004406452178955 seconds.
+2025-10-06 08:35:04,769 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:04,771 - INFO - Processing server: NSVC-PQM31(SGH915TGV7)
+2025-10-06 08:35:04,771 - INFO - Connecting to iLO at 160.20.120.196 for server: NSVC-PQM31(SGH915TGV7)
+2025-10-06 08:35:04,771 - INFO - Initializing no proxy.
+2025-10-06 08:35:05,275 - INFO - Response Time to /redfish/v1: 0.5031118392944336 seconds.
+2025-10-06 08:35:05,275 - INFO - Performing session authentication.
+2025-10-06 08:35:05,315 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.03986072540283203 seconds.
+2025-10-06 08:35:05,316 - INFO - Successfully connected to iLO at 160.20.120.196
+2025-10-06 08:35:05,351 - INFO - Response Time to /redfish/v1/Views: 0.034429311752319336 seconds.
+2025-10-06 08:35:05,352 - INFO - Successfully retrieved data for NSVC-PQM31(SGH915TGV7) (160.20.120.196)
+2025-10-06 08:35:05,352 - INFO - Logging out from 160.20.120.196
+2025-10-06 08:35:05,360 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e2ba4785a1cac0: 0.006917476654052734 seconds.
+2025-10-06 08:35:05,362 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:05,363 - INFO - Processing server: NSVC-PQM32(SGH915TGV9)
+2025-10-06 08:35:05,363 - INFO - Connecting to iLO at 160.20.120.197 for server: NSVC-PQM32(SGH915TGV9)
+2025-10-06 08:35:05,363 - INFO - Initializing no proxy.
+2025-10-06 08:35:05,837 - INFO - Response Time to /redfish/v1: 0.4721238613128662 seconds.
+2025-10-06 08:35:05,837 - INFO - Performing session authentication.
+2025-10-06 08:35:05,857 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.020853042602539062 seconds.
+2025-10-06 08:35:05,858 - INFO - Successfully connected to iLO at 160.20.120.197
+2025-10-06 08:35:05,891 - INFO - Response Time to /redfish/v1/Views: 0.0325160026550293 seconds.
+2025-10-06 08:35:05,892 - INFO - Successfully retrieved data for NSVC-PQM32(SGH915TGV9) (160.20.120.197)
+2025-10-06 08:35:05,892 - INFO - Logging out from 160.20.120.197
+2025-10-06 08:35:05,899 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31a727126e979: 0.005997657775878906 seconds.
+2025-10-06 08:35:05,899 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:05,900 - INFO - Processing server: NSVC-PQM33(SGH915TGV8)
+2025-10-06 08:35:05,902 - INFO - Connecting to iLO at 160.20.120.198 for server: NSVC-PQM33(SGH915TGV8)
+2025-10-06 08:35:05,902 - INFO - Initializing no proxy.
+2025-10-06 08:35:07,294 - INFO - Response Time to /redfish/v1: 1.391864538192749 seconds.
+2025-10-06 08:35:07,294 - INFO - Performing session authentication.
+2025-10-06 08:35:07,494 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.19830751419067383 seconds.
+2025-10-06 08:35:07,495 - INFO - Successfully connected to iLO at 160.20.120.198
+2025-10-06 08:35:07,735 - INFO - Response Time to /redfish/v1/Views: 0.24055242538452148 seconds.
+2025-10-06 08:35:07,735 - INFO - Successfully retrieved data for NSVC-PQM33(SGH915TGV8) (160.20.120.198)
+2025-10-06 08:35:07,736 - INFO - Logging out from 160.20.120.198
+2025-10-06 08:35:07,927 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e2b9bf1b22d0e5: 0.19055819511413574 seconds.
+2025-10-06 08:35:07,927 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:07,929 - INFO - Processing server: ZS14850(SGH305SKKS)
+2025-10-06 08:35:07,929 - INFO - Connecting to iLO at 160.20.120.149 for server: ZS14850(SGH305SKKS)
+2025-10-06 08:35:07,929 - INFO - Initializing no proxy.
+2025-10-06 08:35:08,616 - INFO - Response Time to /redfish/v1: 0.6862404346466064 seconds.
+2025-10-06 08:35:08,617 - INFO - Performing session authentication.
+2025-10-06 08:35:08,720 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.10186076164245605 seconds.
+2025-10-06 08:35:08,720 - INFO - Successfully connected to iLO at 160.20.120.149
+2025-10-06 08:35:09,204 - INFO - Response Time to /redfish/v1/Views: 0.4826343059539795 seconds.
+2025-10-06 08:35:09,204 - INFO - Successfully retrieved data for ZS14850(SGH305SKKS) (160.20.120.149)
+2025-10-06 08:35:09,205 - INFO - Logging out from 160.20.120.149
+2025-10-06 08:35:09,215 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31cb9c872b021: 0.009395837783813477 seconds.
+2025-10-06 08:35:09,215 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.4.Success"}]}}
+2025-10-06 08:35:09,217 - INFO - Processing server: iLO PQM1
+2025-10-06 08:35:09,217 - INFO - Connecting to iLO at 160.20.120.204 for server: iLO PQM1
+2025-10-06 08:35:09,218 - INFO - Initializing no proxy.
+2025-10-06 08:35:09,685 - INFO - Response Time to /redfish/v1: 0.4664630889892578 seconds.
+2025-10-06 08:35:09,685 - INFO - Performing session authentication.
+2025-10-06 08:35:09,701 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.016379117965698242 seconds.
+2025-10-06 08:35:09,701 - INFO - Successfully connected to iLO at 160.20.120.204
+2025-10-06 08:35:09,835 - INFO - Response Time to /redfish/v1/Views: 0.13268613815307617 seconds.
+2025-10-06 08:35:09,836 - INFO - Successfully retrieved data for iLO PQM1 (160.20.120.204)
+2025-10-06 08:35:09,838 - INFO - Logging out from 160.20.120.204
+2025-10-06 08:35:09,844 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e2ba4929374bc6: 0.005990505218505859 seconds.
+2025-10-06 08:35:09,845 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:35:09,846 - INFO - Processing server: iLO PQM2
+2025-10-06 08:35:09,847 - INFO - Connecting to iLO at 160.20.120.205 for server: iLO PQM2
+2025-10-06 08:35:09,847 - INFO - Initializing no proxy.
+2025-10-06 08:35:24,888 - WARNING - Retrying (Retry(total=9, connect=50, read=49, redirect=50, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='160.20.120.205', port=443): Read timed out. (read timeout=15)")': /redfish/v1
+2025-10-06 08:35:39,940 - WARNING - Retrying (Retry(total=8, connect=50, read=48, redirect=50, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='160.20.120.205', port=443): Read timed out. (read timeout=15)")': /redfish/v1
+2025-10-06 08:36:26,847 - INFO - --- Starting iLO Health Check Script ---
+2025-10-06 08:36:26,849 - INFO - Loading server list from Excel file...
+2025-10-06 08:36:27,371 - INFO - Successfully loaded 13 servers from file.
+2025-10-06 08:36:27,373 - INFO - Processing server: NSVC-PQM21(SGH948VWX4)
+2025-10-06 08:36:27,375 - INFO - Connecting to iLO at 160.20.120.193 for server: NSVC-PQM21(SGH948VWX4)
+2025-10-06 08:38:01,025 - INFO - Initializing no proxy.
+2025-10-06 08:38:10,641 - INFO - Response Time to /redfish/v1: 0.4933128356933594 seconds.
+2025-10-06 08:38:10,642 - INFO - Performing session authentication.
+2025-10-06 08:38:10,672 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.027730464935302734 seconds.
+2025-10-06 08:38:12,880 - INFO - Successfully connected to iLO at 160.20.120.193
+2025-10-06 08:38:14,335 - INFO - Response Time to /redfish/v1/Views: 0.03042125701904297 seconds.
+2025-10-06 08:38:17,161 - INFO - Successfully retrieved data for NSVC-PQM21(SGH948VWX4) (160.20.120.193)
+2025-10-06 08:38:24,208 - INFO - Logging out from 160.20.120.193
+2025-10-06 08:38:31,560 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31d6e1ba5e354: 0.03890824317932129 seconds.
+2025-10-06 08:38:31,560 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
+2025-10-06 08:39:21,401 - INFO - Processing server: NSVC-PQM22(SGH943Y0GS)
+2025-10-06 08:39:24,049 - INFO - Connecting to iLO at 160.20.120.194 for server: NSVC-PQM22(SGH943Y0GS)
+2025-10-06 08:39:27,129 - INFO - Initializing no proxy.
+2025-10-06 08:39:28,061 - INFO - Response Time to /redfish/v1: 0.46878933906555176 seconds.
+2025-10-06 08:39:28,062 - INFO - Performing session authentication.
+2025-10-06 08:39:28,094 - INFO - Response Time to /redfish/v1/SessionService/Sessions: 0.03126645088195801 seconds.
+2025-10-06 08:39:28,458 - INFO - Successfully connected to iLO at 160.20.120.194
+2025-10-06 08:39:29,497 - INFO - Response Time to /redfish/v1/Views: 0.10349059104919434 seconds.
+2025-10-06 08:39:31,225 - INFO - Successfully retrieved data for NSVC-PQM22(SGH943Y0GS) (160.20.120.194)
+2025-10-06 08:39:45,610 - INFO - Logging out from 160.20.120.194
+2025-10-06 08:39:46,893 - INFO - Response Time to /redfish/v1/SessionService/Sessions/administrator0000000068e31dc1f22d0e56: 0.008527040481567383 seconds.
+2025-10-06 08:39:46,893 - INFO - User logged out: {"error":{"code":"iLO.0.10.ExtendedInfo","message":"See @Message.ExtendedInfo for more information.","@Message.ExtendedInfo":[{"MessageId":"Base.1.0.Success"}]}}
