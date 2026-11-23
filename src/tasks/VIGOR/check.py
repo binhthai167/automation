@@ -6,19 +6,20 @@ import datetime
 import os
 
 # ================= CẤU HÌNH HỆ THỐNG =================
-EMAIL_FROM = "ltbinh.h@gmail.com"
-APP_PASSWORD = "vkge xbmp zrxe knde" # Mã 16 ký tự của Google
+EMAIL_FROM = "noreply.nivs@gmail.com"
+APP_PASSWORD = "jjxpgndrikbftwed" # Mã 16 ký tự của Google
 GMAIL_TO = [
-    # "hai.tranviet@nidec.com",
-    # "phu.truongvan@nidec.com",
+    "hai.tranviet@nidec.com",
+    "phu.truongvan@nidec.com",
     "binh.lethai@nidec.com",
 ]
 
 SYSLOG_IP = "0.0.0.0" # Lắng nghe trên mọi IP của máy tính này
 SYSLOG_PORT = 514     # Cổng mặc định của Syslog
-# FILE_DANH_SACH = r"D:\Automation\src\tasks\VIGOR\danh_sach_mac.txt"
-FILE_DANH_SACH = "list_mac.txt"
-TU_KHOA_BO_QUA = ["iphone", "galaxy", "xiaomi", "oppo", "vivo", "huawei", "android", "ipad", "redmi", "realme"]
+FILE_DANH_SACH = r"D:\Automation\src\tasks\VIGOR\danh_sach_mac.txt"
+TU_KHOA_BO_QUA = ["iphone", "galaxy", "xiaomi", "oppo", "vivo", "huawei", "android",
+                  "ipad", "redmi", "realme", "mi-", "sm-",
+                  "watch", "band", "garmin", "fitbit", "amazfit", "huami"]
 # =====================================================
 
 # Biến lưu trữ các MAC lạ đã gửi mail để tránh spam sếp nhiều lần
@@ -59,7 +60,7 @@ def send_email(mac_la, ten_thiet_bi, thong_tin_log):
     
     msg = EmailMessage()
     msg['Subject'] = f"🚨 CẢNH BÁO: Phát hiện thiết bị lạ bắt Wifi Visitor!"
-    msg['From'] = EMAIL_FROM
+    msg['From'] =  EMAIL_FROM
     msg["To"] = ", ".join(GMAIL_TO)
     
     noi_dung = f"""
@@ -127,6 +128,19 @@ def bat_dau_giam_sat():
                         if la_di_dong:
                             print(f"[*] Đã chặn báo cáo: MAC {mac_hien_tai} - Tên: {ten_thiet_bi} (Lý do: Là thiết bị di động)")
                             continue
+
+                        # ================= THÊM MỚI TẠI ĐÂY =================
+                        # BỘ LỌC 3: Bỏ qua các IP thuộc dải 50.xxx
+                        # Tìm địa chỉ IP trong dòng log (Ví dụ: 192.168.50.15)
+                        ip_match = re.search(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', log_text)
+                        if ip_match:
+                            ip_hien_tai = ip_match.group(0)
+                            ip_parts = ip_hien_tai.split('.')
+                            
+                            # Kiểm tra xem cụm số thứ 3 có phải là '50' không (x.y.50.z)
+                            if len(ip_parts) == 4 and ip_parts[2] == '50':
+                                print(f"[*] Đã chặn báo cáo: MAC {mac_hien_tai} - Tên: {ten_thiet_bi} (Lý do: Thuộc dải IP {ip_hien_tai})")
+                                continue
                             
                         # === VƯỢT QUA BỘ LỌC ===
                         # Nếu tới được đây tức là có tên và không phải điện thoại

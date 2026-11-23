@@ -1,0 +1,957 @@
+streams:
+  # Cú pháp: [Tên_Camera]: [Link_RTSP_của_Đầu_ghi]
+      # Xưởng A - Staff Entrance
+  xuong_a_cam1: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng A - F2A Phone locker
+  xuong_a_cam2: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=2&subtype=1
+
+  # Xưởng A - CRF2 Middle
+  xuong_a_cam3: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=3&subtype=1
+
+  # Xưởng A - F2A Office
+  xuong_a_cam4: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng A - F2A Relax
+  xuong_a_cam5: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng A - F1A Relax
+  xuong_a_cam6: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng A - Hall
+  xuong_a_cam7: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng A - F1A Phone locker
+  xuong_a_cam8: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng A - GA Office
+  xuong_a_cam9: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng A - CRF1 Inside
+  xuong_a_cam10: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng A - CRF1 before OQC
+  xuong_a_cam11: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng A - SA-SUS near GA
+  xuong_a_cam12: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng A - FA1 Warehouse
+  xuong_a_cam13: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=13&subtype=1
+
+  # Xưởng A - CRF1 Lobby
+  xuong_a_cam14: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng A - CFR1 Measurement
+  xuong_a_cam15: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=15&subtype=1
+
+  # Xưởng A - FA1 PE Develoment 2
+  xuong_a_cam16: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=16&subtype=1
+
+  # Xưởng A - Not in use
+  xuong_a_cam32: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=32&subtype=1
+
+  # Xưởng A - FA1 PE Develoment 1
+  xuong_a_cam20: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng A - F2E OQC
+  xuong_a_cam22: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng A - F1E Middle
+  xuong_a_cam24: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=24&subtype=1
+
+  # Xưởng A - CFR1 Middle
+  xuong_a_cam25: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=25&subtype=1
+
+  # Xưởng A - CRF1 Middle
+  xuong_a_cam26: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng A - F2E before OQC
+  xuong_a_cam27: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=27&subtype=1
+
+  # Xưởng A - SA-SUS Entrance
+  xuong_a_cam28: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=28&subtype=1
+
+  # Xưởng A - SA-SUS Phone locker
+  xuong_a_cam30: rtsp://admin:1234abcd@101.99.46.50:8082/cam/realmonitor?channel=30&subtype=1
+
+    # Xưởng B - F1B MAGNET REAR
+  xuong_b_cam1: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng B - F1B L/S STORE
+  xuong_b_cam2: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=2&subtype=1
+
+  # Xưởng B - F1B MAGNET FRONT
+  xuong_b_cam3: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=3&subtype=1
+
+  # Xưởng B - MAGNET MEASURING FRONT
+  xuong_b_cam4: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng B - F1B L/S NEAR MAGNET
+  xuong_b_cam5: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng B - F1B MAGNET MIDDLE
+  xuong_b_cam6: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng B - F2B BAVIA MIDDLE
+  xuong_b_cam7: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng B - F2B BAVIA REAR
+  xuong_b_cam8: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng B - F2B BAVIA FRONT
+  xuong_b_cam9: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng B - F2B To F2A
+  xuong_b_cam10: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng B - F2B ROOM ENG
+  xuong_b_cam11: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng B - BASE B STAIR
+  xuong_b_cam12: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng B - NOT IN USE
+  xuong_b_cam31: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=31&subtype=1
+
+  # Xưởng B - IDLE ASSET TYPE C
+  xuong_b_cam14: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng B - F1B END
+  xuong_b_cam17: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=17&subtype=1
+
+  # Xưởng B - F2B SA LINE REAR
+  xuong_b_cam18: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=18&subtype=1
+
+  # Xưởng B - LATH-BOSS
+  xuong_b_cam19: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=19&subtype=1
+
+  # Xưởng B - L/S MACHINE NEAR OFFICE
+  xuong_b_cam20: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng B - F1B RELAX
+  xuong_b_cam21: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=21&subtype=1
+
+  # Xưởng B - BASE B MAGNET WIRE STORE
+  xuong_b_cam22: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng B - MAGNET MEASURING REAR
+  xuong_b_cam23: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=23&subtype=1
+
+  # Xưởng B - OUT FB
+  xuong_b_cam24: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=24&subtype=1
+
+  # Xưởng B - APPEARANCE Rm NEAR OFFICE
+  xuong_b_cam25: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=25&subtype=1
+
+  # Xưởng B - BASE B OLD TIMEKEEPER
+  xuong_b_cam26: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng B - F1B L/S MEASURING Rm
+  xuong_b_cam27: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=27&subtype=1
+
+  # Xưởng B - F1B CORRIDOR 1
+  xuong_b_cam28: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=28&subtype=1
+
+  # Xưởng B - L/S OFFICE
+  xuong_b_cam30: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=30&subtype=1
+
+  # Xưởng B - IM/EXPORT FA,FB
+  xuong_b_cam32: rtsp://admin:123abc@101.99.46.50:8081/cam/realmonitor?channel=32&subtype=1
+
+     # Xưởng C - WASTE AREA
+  xuong_c_cam1: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng C - F2C TO F2B
+  xuong_c_cam2: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=2&subtype=1
+
+  # Xưởng C - F1C PRESS OFFICE
+  xuong_c_cam3: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=3&subtype=1
+
+  # Xưởng C - F1C STORE NEAR OFFICE
+  xuong_c_cam4: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng C - F2C PE STORE
+  xuong_c_cam5: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng C - F2C STAIR
+  xuong_c_cam6: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng C - F1C MEASURING Rm
+  xuong_c_cam7: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng C - F1.5C MEETING Rm
+  xuong_c_cam8: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng C - OUT FC
+  xuong_c_cam9: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng C - F1C MIDDLE
+  xuong_c_cam10: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng C - F1C JIG Rm REAR
+  xuong_c_cam11: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng C - F1C JIG Rm FRONT
+  xuong_c_cam12: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng C - F1C TO WASTE AREA
+  xuong_c_cam13: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=13&subtype=1
+
+  # Xưởng C - STORE BASE FC
+  xuong_c_cam14: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng C - F2 CANTEEN WASHING
+  xuong_c_cam30: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=30&subtype=1
+
+  # Xưởng C - STORE F2C REAR
+  xuong_c_cam16: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=16&subtype=1
+
+  # Xưởng C - TIME RECORDING
+  xuong_c_cam17: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=17&subtype=1
+
+  # Xưởng C - OUT LOCKER NEAR GAS
+  xuong_c_cam18: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=18&subtype=1
+
+  # Xưởng C - GAS STORE
+  xuong_c_cam19: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=19&subtype=1
+
+  # Xưởng C - OUT LOCKER 1
+  xuong_c_cam20: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng C - LOCKER 1
+  xuong_c_cam21: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=21&subtype=1
+
+  # Xưởng C - F2 CANTEEN MIDLE
+  xuong_c_cam22: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng C - LOCKER 2
+  xuong_c_cam23: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=23&subtype=1
+
+  # Xưởng C - CORNER OFFICE-CANTEEN
+  xuong_c_cam24: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=24&subtype=1
+
+  # Xưởng C - F2 CANTEEN NODLE
+  xuong_c_cam25: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=25&subtype=1
+
+  # Xưởng C - THAO HA TO LOCKER
+  xuong_c_cam26: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng C - THAOHA FRONT
+  xuong_c_cam27: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=27&subtype=1
+
+  # Xưởng C - SMOKING AREA
+  xuong_c_cam28: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=28&subtype=1
+
+  # Xưởng C - ATM
+  xuong_c_cam29: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=29&subtype=1
+
+  # Xưởng C - THAOHA REAR
+  xuong_c_cam31: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=31&subtype=1
+
+  # Xưởng C - NOT IN USE
+  xuong_c_cam32: rtsp://admin:123abc@101.99.46.50:8086/cam/realmonitor?channel=32&subtype=1
+
+    # Xưởng D1 - F1D PQC-PQA
+  xuong_d1_cam1: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng D1 - NOT IN USE
+  xuong_d1_cam32: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=32&subtype=1
+
+  # Xưởng D1 - P.TBi MDU F2D
+  xuong_d1_cam3: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=3&subtype=1
+
+  # Xưởng D1 - F1D MOLD REPAIR AREA
+  xuong_d1_cam4: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng D1 - F1D BEFORE MOLD OFFICE
+  xuong_d1_cam5: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng D1 - F1D MOLD M.229-230
+  xuong_d1_cam6: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng D1 - MOLD M.409 To PQC
+  xuong_d1_cam7: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng D1 - F1D APPEARANCE Rm
+  xuong_d1_cam8: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng D1 - MOLD M.616 To OFFICE
+  xuong_d1_cam9: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng D1 - F2D TO CANTEEN
+  xuong_d1_cam10: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng D1 - MOLD M.607-608
+  xuong_d1_cam11: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng D1 - BEFORE BRAZING To MACHINE
+  xuong_d1_cam12: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng D1 - SUB-MATERIAL WH
+  xuong_d1_cam13: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=13&subtype=1
+
+  # Xưởng D1 - F1D MOLD M.304-407
+  xuong_d1_cam14: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng D1 - F1D IQC
+  xuong_d1_cam15: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=15&subtype=1
+
+  # Xưởng D1 - F1D MOLD TO STORE F1D
+  xuong_d1_cam16: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=16&subtype=1
+
+  # Xưởng D1 - BASE FD PUMP
+  xuong_d1_cam17: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=17&subtype=1
+
+  # Xưởng D1 - BASE FD DOOR 3
+  xuong_d1_cam18: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=18&subtype=1
+
+  # Xưởng D1 - BASE FD DOOR 2
+  xuong_d1_cam19: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=19&subtype=1
+
+  # Xưởng D1 - BASE FD MOLD STORE
+  xuong_d1_cam20: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng D1 - PARKING 1
+  xuong_d1_cam21: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=21&subtype=1
+
+  # Xưởng D1 - PARKING 2
+  xuong_d1_cam22: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng D1 - F2D DEVICE STORE MDU
+  xuong_d1_cam23: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=23&subtype=1
+
+  # Xưởng D1 - F2D COOPER WIRE
+  xuong_d1_cam24: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=24&subtype=1
+
+  # Xưởng D1 - F2D TO F2F
+  xuong_d1_cam25: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=25&subtype=1
+
+  # Xưởng D1 - F2D CLEAN Rm
+  xuong_d1_cam26: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng D1 - F2D NSBD
+  xuong_d1_cam28: rtsp://admin:123abc@101.99.46.50:8087/cam/realmonitor?channel=28&subtype=1
+
+    # Xưởng D2 - F2D CORRIDOR
+  xuong_d2_cam1: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng D2 - NOT IN USE
+  xuong_d2_cam2: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=2&subtype=1
+
+  # Xưởng D2 - F1.5D LIFT 1
+  xuong_d2_cam3: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=3&subtype=1
+
+  # Xưởng D2 - F1.5 D CORIDOR
+  xuong_d2_cam4: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng D2 - F1D RELAX NEAR OFFICE
+  xuong_d2_cam5: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng D2 - F1D BRAZING Rm
+  xuong_d2_cam6: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng D2 - F2D RELAX
+  xuong_d2_cam7: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng D2 - F1D SMOKING AREA
+  xuong_d2_cam8: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng D2 - BASE FD TO F1D
+  xuong_d2_cam9: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng D2 - BASE D STAIR To COMPUTER
+  xuong_d2_cam10: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng D2 - BASE D MIDDLE WAY
+  xuong_d2_cam11: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng D2 - BASE FD TECH Rm
+  xuong_d2_cam12: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng D2 - F1.5D NSBC PRODUCT
+  xuong_d2_cam13: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=13&subtype=1
+
+  # Xưởng D2 - F1.5D NTCV-TMDF PRODUCT
+  xuong_d2_cam14: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng D2 - F1.5D A1 To SAMPLE QA
+  xuong_d2_cam15: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=15&subtype=1
+
+  # Xưởng D2 - F1.5D STORE Rm DOOR
+  xuong_d2_cam16: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=16&subtype=1
+
+  # Xưởng D2 - UNKNOWN
+  xuong_d2_cam17: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=17&subtype=1
+
+  # Xưởng D2 - F1.5D A24-A25
+  xuong_d2_cam18: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=18&subtype=1
+
+  # Xưởng D2 - F1.5D A1-B2
+  xuong_d2_cam19: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=19&subtype=1
+
+  # Xưởng D2 - F1.5D STAIR To MOLD OFFICE
+  xuong_d2_cam20: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng D2 - F1D MOLD M.113-114
+  xuong_d2_cam21: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=21&subtype=1
+
+  # Xưởng D2 - F1D MOLD OFFICE
+  xuong_d2_cam22: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng D2 - F1D MOLD M.615-616
+  xuong_d2_cam23: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=23&subtype=1
+
+  # Xưởng D2 - F1D MOLD M.611-612
+  xuong_d2_cam24: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=24&subtype=1
+
+  # Xưởng D2 - F1D WH OFFICE
+  xuong_d2_cam25: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=25&subtype=1
+
+  # Xưởng D2 - F1D BRAZING INSPECTION-M.234
+  xuong_d2_cam26: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng D2 - F1D BRAZING To PQC
+  xuong_d2_cam27: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=27&subtype=1
+
+  # Xưởng D2 - F1D PQC To MOLD DESIGN
+  xuong_d2_cam28: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=28&subtype=1
+
+  # Xưởng D2 - F1D LIFT WASHING
+  xuong_d2_cam29: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=29&subtype=1
+
+  # Xưởng D2 - F1.5D LIFT 2
+  xuong_d2_cam30: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=30&subtype=1
+
+  # Xưởng D2 - F1D LIFT NEAR FE
+  xuong_d2_cam31: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=31&subtype=1
+
+  # Xưởng D2 - F2D NSBA-BZ
+  xuong_d2_cam32: rtsp://admin:123abc@101.99.46.50:8083/cam/realmonitor?channel=32&subtype=1
+
+   # Rec 16CH - BASE FD MATERIAL
+  rec_16ch_cam1: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=1&subtype=1
+
+  # Rec 16CH - LIFT FC
+  rec_16ch_cam2: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=2&subtype=1
+
+  # Rec 16CH - LIFT F REAR
+  rec_16ch_cam3: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=3&subtype=1
+
+  # Rec 16CH - LIFT 2 FD
+  rec_16ch_cam4: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=4&subtype=1
+
+  # Rec 16CH - F2E OQC to F2D
+  rec_16ch_cam5: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=5&subtype=1
+
+  # Rec 16CH - NOT IN USE
+  rec_16ch_cam16: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=16&subtype=1
+
+  # Rec 16CH - BASE UTILITY
+  rec_16ch_cam7: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=7&subtype=1
+
+  # Rec 16CH - F1D TIMEKEEPER IN
+  rec_16ch_cam8: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=8&subtype=1
+
+  # Rec 16CH - F2D TIMEKEEPER OUT
+  rec_16ch_cam9: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=9&subtype=1
+
+  # Rec 16CH - UTILITY FLOOR 1
+  rec_16ch_cam10: rtsp://admin:12345abc@101.99.46.50:8084/cam/realmonitor?channel=10&subtype=1
+
+    # Xưởng F - F1.5 F MIDDLE
+  xuong_f_cam1: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=1&subtype=1
+
+  # Xưởng F - F1.5F REAR LIFT
+  xuong_f_cam2: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=2&subtype=1
+
+  # Xưởng F - NOT IN USE
+  xuong_f_cam32: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=32&subtype=1
+
+  # Xưởng F - F1F IQC
+  xuong_f_cam4: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=4&subtype=1
+
+  # Xưởng F - F1F REAR 1
+  xuong_f_cam5: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=5&subtype=1
+
+  # Xưởng F - BASE F REAR LIFT
+  xuong_f_cam6: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=6&subtype=1
+
+  # Xưởng F - F2F LIFT FRONT
+  xuong_f_cam7: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=7&subtype=1
+
+  # Xưởng F - F1.5 F REAR LIFT
+  xuong_f_cam8: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=8&subtype=1
+
+  # Xưởng F - F2F OFFICE
+  xuong_f_cam9: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=9&subtype=1
+
+  # Xưởng F - BASE F FRONT 1
+  xuong_f_cam10: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=10&subtype=1
+
+  # Xưởng F - BASE F FRONT LIFT
+  xuong_f_cam11: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=11&subtype=1
+
+  # Xưởng F - F3F REAR 1
+  xuong_f_cam12: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=12&subtype=1
+
+  # Xưởng F - BASE F REAR 1
+  xuong_f_cam13: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=13&subtype=1
+
+  # Xưởng F - F1F TIMEKEEPER
+  xuong_f_cam14: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=14&subtype=1
+
+  # Xưởng F - F1F FRONT LIFT
+  xuong_f_cam15: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=15&subtype=1
+
+  # Xưởng F - F3F REAR LIFT
+  xuong_f_cam16: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=16&subtype=1
+
+  # Xưởng F - F2F REAR 1
+  xuong_f_cam17: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=17&subtype=1
+
+  # Xưởng F - F2F REAR LIFT
+  xuong_f_cam18: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=18&subtype=1
+
+  # Xưởng F - F1F OFFICE
+  xuong_f_cam19: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=19&subtype=1
+
+  # Xưởng F - F1.5 F FRONT
+  xuong_f_cam20: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=20&subtype=1
+
+  # Xưởng F - F2F TIMEKEEPER
+  xuong_f_cam21: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=21&subtype=1
+
+  # Xưởng F - F1F JIG 1
+  xuong_f_cam22: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=22&subtype=1
+
+  # Xưởng F - MAINTENANCE Rm
+  xuong_f_cam23: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=23&subtype=1
+
+  # Xưởng F - F3F FRONT 1
+  xuong_f_cam26: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=26&subtype=1
+
+  # Xưởng F - F2F FRONT 2
+  xuong_f_cam27: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=27&subtype=1
+
+  # Xưởng F - WASTE WATER
+  xuong_f_cam28: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=28&subtype=1
+
+  # Xưởng F - F1F JIG 3
+  xuong_f_cam29: rtsp://admin:123abc@101.99.46.50:8089/cam/realmonitor?channel=29&subtype=1
+
+  # Hai Quan cu - F1E GATE E1
+  hai_quan_cu_cam1: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=1&subtype=1"
+
+  # Hai Quan cu - F1E GATE E4
+  hai_quan_cu_cam2: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=2&subtype=1"
+
+  # Hai Quan cu - F1D WASHING RM EXIT
+  hai_quan_cu_cam3: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=3&subtype=1"
+
+  # Hai Quan cu - OIL STORE
+  hai_quan_cu_cam4: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=4&subtype=1"
+
+  # Hai Quan cu - BASE B NEAR CANTEEN
+  hai_quan_cu_cam5: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=5&subtype=1"
+
+  # Hai Quan cu - F SERVO
+  hai_quan_cu_cam6: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=6&subtype=1"
+
+  # Hai Quan cu - BASE B DOOR OUTSIDE
+  hai_quan_cu_cam7: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=7&subtype=1"
+
+  # Hai Quan cu - BASE B
+  hai_quan_cu_cam8: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8085/cam/realmonitor?channel=8&subtype=1"
+
+  # Hai Quan moi - Base_D Magnet wire
+  hai_quan_moi_cam1: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=1&subtype=1"
+
+  # Hai Quan moi - Gate E7
+  hai_quan_moi_cam2: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=2&subtype=1"
+
+  # Hai Quan moi - Base_D Exim
+  hai_quan_moi_cam3: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=3&subtype=1"
+
+  # Hai Quan moi - Out_F rear 1
+  hai_quan_moi_cam4: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=4&subtype=1"
+
+  # Hai Quan moi - Out_F front 2
+  hai_quan_moi_cam5: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=5&subtype=1"
+
+  # Hai Quan moi - Gate E3
+  hai_quan_moi_cam6: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=6&subtype=1"
+
+  # Hai Quan moi - Out_F front 1
+  hai_quan_moi_cam7: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=7&subtype=1"
+
+  # Hai Quan moi - Out_F rear 2
+  hai_quan_moi_cam8: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=8&subtype=1"
+
+  # Hai Quan moi - Out A
+  hai_quan_moi_cam9: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=9&subtype=1"
+
+  # Hai Quan moi - Out_F Stream
+  hai_quan_moi_cam10: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=10&subtype=1"
+
+  # Hai Quan moi - NOT IN USE
+  hai_quan_moi_cam32: "rtsp://hqnivs:H7%23kP9%40m@101.99.46.50:8090/cam/realmonitor?channel=32&subtype=1"
+
+    # Xưởng FB - Camera 01
+  xuong_fb_cam1: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/102
+
+  # Xưởng FB - Camera 02
+  xuong_fb_cam2: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/202
+
+  # Xưởng FB - Camera 03
+  xuong_fb_cam3: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/302
+
+  # Xưởng FB - Camera 04
+  xuong_fb_cam4: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/402
+
+  # Xưởng FB - Camera 05
+  xuong_fb_cam5: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/502
+
+  # Xưởng FB - Camera 06
+  xuong_fb_cam6: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/602
+
+  # Xưởng FB - Camera 07
+  xuong_fb_cam7: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/702
+
+  # Xưởng FB - Camera 08
+  xuong_fb_cam8: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/802
+
+  # Xưởng FB - Camera 09
+  xuong_fb_cam9: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/902
+
+  # Xưởng FB - Camera F2-1-1
+  xuong_fb_cam10: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1002
+
+  # Xưởng FB - Camera A2-1-1
+  xuong_fb_cam11: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1102
+
+  # Xưởng FB - Camera B1-1-1
+  xuong_fb_cam12: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1202
+
+  # Xưởng FB - Camera A1-1-1
+  xuong_fb_cam13: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1302
+
+  # Xưởng FB - Camera D1-1-1
+  xuong_fb_cam14: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1402
+
+  # Xưởng FB - Camera D1-3-1
+  xuong_fb_cam15: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1502
+
+  # Xưởng FB - Camera D1-2-1
+  xuong_fb_cam16: rtsp://admin:TDK-2025@160.20.120.155:554/Streaming/Channels/1602
+
+    # Xưởng FC - Camera 01
+  xuong_fc_cam1: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/102
+
+  # Xưởng FC - Camera 02
+  xuong_fc_cam2: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/202
+
+  # Xưởng FC - Camera 03
+  xuong_fc_cam3: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/302
+
+  # Xưởng FC - Camera 04
+  xuong_fc_cam4: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/402
+
+  # Xưởng FC - Camera 05
+  xuong_fc_cam5: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/502
+
+  # Xưởng FC - Camera 06
+  xuong_fc_cam6: rtsp://admin:1357Abcd@160.20.120.14:554/Streaming/Channels/602
+
+    # Xưởng FD - Camera 01
+  xuong_fd_cam1: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/102
+
+  # Xưởng FD - Camera 02
+  xuong_fd_cam2: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/202
+
+  # Xưởng FD - Camera 03
+  xuong_fd_cam3: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/302
+
+  # Xưởng FD - Camera 04
+  xuong_fd_cam4: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/402
+
+  # Xưởng FD - Camera 05
+  xuong_fd_cam5: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/502
+
+  # Xưởng FD - Camera 06
+  xuong_fd_cam6: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/602
+
+  # Xưởng FD - Camera 07
+  xuong_fd_cam7: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/702
+
+  # Xưởng FD - Camera 08
+  xuong_fd_cam8: rtsp://admin:TDK-2025@160.20.120.165:554/Streaming/Channels/802
+
+    # Xưởng FF - Camera 01
+  xuong_ff_cam1: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/102
+
+  # Xưởng FF - Camera 02
+  xuong_ff_cam2: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/202
+
+  # Xưởng FF - Camera 03
+  xuong_ff_cam3: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/302
+
+  # Xưởng FF - Camera 04
+  xuong_ff_cam4: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/402
+
+    # Xưởng FF - Camera 2F-3
+  xuong_ff_cam5: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/502
+
+  # Xưởng FF - Camera 2F-4
+  xuong_ff_cam6: rtsp://admin:TDK-2025@160.20.120.174:554/Streaming/Channels/602
+
+    # Xưởng F_1FL - Camera F1-2-1
+  xuong_f_1fl_cam1: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/102
+
+  # Xưởng F_1FL - Camera F1-3-4
+  xuong_f_1fl_cam2: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/202
+
+  # Xưởng F_1FL - Camera F1-3-5
+  xuong_f_1fl_cam3: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/302
+
+  # Xưởng F_1FL - Camera F1-2-8
+  xuong_f_1fl_cam4: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/402
+
+  # Xưởng F_1FL - Camera F1-2-9
+  xuong_f_1fl_cam5: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/502
+
+  # Xưởng F_1FL - Camera F1-2-4
+  xuong_f_1fl_cam6: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/602
+
+  # Xưởng F_1FL - Camera F1-2-7
+  xuong_f_1fl_cam7: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/702
+
+  # Xưởng F_1FL - Camera F1-3-7
+  xuong_f_1fl_cam8: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/802
+
+  # Xưởng F_1FL - Camera F1-3-8
+  xuong_f_1fl_cam9: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/902
+
+  # Xưởng F_1FL - Camera F1-3-6
+  xuong_f_1fl_cam10: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1002
+
+  # Xưởng F_1FL - Camera F1-3-10
+  xuong_f_1fl_cam11: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1102
+
+  # Xưởng F_1FL - Camera F1-3-9
+  xuong_f_1fl_cam12: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1202
+
+  # Xưởng F_1FL - Camera F1-2-2
+  xuong_f_1fl_cam13: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1302
+
+  # Xưởng F_1FL - Camera F1-3-11
+  xuong_f_1fl_cam14: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1402
+
+  # Xưởng F_1FL - Camera F1-3-12
+  xuong_f_1fl_cam15: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1502
+
+  # Xưởng F_1FL - Camera F1-2-6
+  xuong_f_1fl_cam16: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1602
+
+  # Xưởng F_1FL - Camera F1-2-5
+  xuong_f_1fl_cam17: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1702
+
+  # Xưởng F_1FL - Camera A2-1-1
+  xuong_f_1fl_cam18: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1802
+
+  # Xưởng F_1FL - Camera F1-3-1
+  xuong_f_1fl_cam19: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/1902
+
+  # Xưởng F_1FL - Camera F1-3-2
+  xuong_f_1fl_cam20: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2002
+
+  # Xưởng F_1FL - Camera F2-1-1
+  xuong_f_1fl_cam21: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2102
+
+  # Xưởng F_1FL - Camera F1-2-10
+  xuong_f_1fl_cam22: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2202
+
+  # Xưởng F_1FL - Camera F1-3-3
+  xuong_f_1fl_cam23: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2302
+
+  # Xưởng F_1FL - Camera F1-1-7
+  xuong_f_1fl_cam24: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2402
+
+  # Xưởng F_1FL - Camera F1-1-1
+  xuong_f_1fl_cam25: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2502
+
+  # Xưởng F_1FL - Camera F1-1-6
+  xuong_f_1fl_cam26: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2602
+
+  # Xưởng F_1FL - Camera F1-1-2
+  xuong_f_1fl_cam27: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2702
+
+  # Xưởng F_1FL - Camera F1-1-3
+  xuong_f_1fl_cam28: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2802
+
+  # Xưởng F_1FL - Camera F1-1-4
+  xuong_f_1fl_cam29: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/2902
+
+  # Xưởng F_1FL - Camera F1-1-5
+  xuong_f_1fl_cam30: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3002
+
+  # Xưởng F_1FL - Camera FB-1-1
+  xuong_f_1fl_cam31: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3102
+
+  # Xưởng F_1FL - Camera FB-1-2
+  xuong_f_1fl_cam32: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3202
+
+  # Xưởng F_1FL - Camera E2-1-1
+  xuong_f_1fl_cam33: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3302
+
+  # Xưởng F_1FL - Camera E2-1-2
+  xuong_f_1fl_cam34: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3402
+
+  # Xưởng F_1FL - Camera D1-2-1
+  xuong_f_1fl_cam35: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3502
+
+  # Xưởng F_1FL - Camera D1-4-1
+  xuong_f_1fl_cam36: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3602
+
+  # Xưởng F_1FL - Camera D1-1-1
+  xuong_f_1fl_cam37: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3702
+
+  # Xưởng F_1FL - Camera DB-1-1
+  xuong_f_1fl_cam38: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3802
+
+  # Xưởng F_1FL - Camera B1-1-1
+  xuong_f_1fl_cam39: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/3902
+
+  # Xưởng F_1FL - Camera A1-1-1
+  xuong_f_1fl_cam40: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4002
+
+  # Xưởng F_1FL - Camera A1-2-1
+  xuong_f_1fl_cam41: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4102
+
+  # Xưởng F_1FL - Camera F1-2-3
+  xuong_f_1fl_cam42: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4202
+
+  # Xưởng F_1FL - Camera D1-3-2
+  xuong_f_1fl_cam43: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4302
+
+  # Xưởng F_1FL - Camera D1-3-1
+  xuong_f_1fl_cam44: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4402
+
+  # Xưởng F_1FL - Camera BP-1F-01
+  xuong_f_1fl_cam45: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4502
+
+  # Xưởng F_1FL - Camera BP-1F-02
+  xuong_f_1fl_cam46: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4602
+
+  # Xưởng F_1FL - Camera BP-1F-03
+  xuong_f_1fl_cam47: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4702
+
+  # Xưởng F_1FL - Camera BP-1F-04
+  xuong_f_1fl_cam48: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4802
+
+  # Xưởng F_1FL - Camera BP-2F-01
+  xuong_f_1fl_cam49: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/4902
+
+  # Xưởng F_1FL - Camera BP-2F-02
+  xuong_f_1fl_cam50: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5002
+
+  # Xưởng F_1FL - Camera BP-2F-03
+  xuong_f_1fl_cam51: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5102
+
+  # Xưởng F_1FL - Camera BP-2F-04
+  xuong_f_1fl_cam52: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5202
+
+  # Xưởng F_1FL - Camera BP-3F-01
+  xuong_f_1fl_cam53: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5302
+
+  # Xưởng F_1FL - Camera BP-3F-02
+  xuong_f_1fl_cam54: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5402
+
+  # Xưởng F_1FL - Camera BP-3F-03
+  xuong_f_1fl_cam55: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5502
+
+  # Xưởng F_1FL - Camera BP-3F-04
+  xuong_f_1fl_cam56: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5602
+
+  # Xưởng F_1FL - Camera 3F-5
+  xuong_f_1fl_cam57: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5702
+
+  # Xưởng F_1FL - Camera 3F-6
+  xuong_f_1fl_cam58: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5802
+
+  # Xưởng F_1FL - Camera FB-1-3
+  xuong_f_1fl_cam59: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/5902
+
+  # Xưởng F_1FL - Camera 3F-7
+  xuong_f_1fl_cam60: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/6002
+
+    # Xưởng F_1FL - Camera C-1-101
+  xuong_f_1fl_cam61: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/6102
+
+  # Xưởng F_1FL - Camera C-1-102
+  xuong_f_1fl_cam62: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/6202
+
+  # Xưởng F_1FL - Camera C-1-103
+  xuong_f_1fl_cam63: rtsp://admin:TDK-2025@160.20.120.110:554/Streaming/Channels/6302
+
+    # Fence - Camera OD-01
+  fence_cam1: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/102
+
+  # Fence - Camera OD-02
+  fence_cam2: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/202
+
+  # Fence - Camera OD-03
+  fence_cam3: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/302
+
+  # Fence - Camera OD-04
+  fence_cam4: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/402
+
+  # Fence - Camera OD-05
+  fence_cam5: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/502
+
+  # Fence - Camera OD-06
+  fence_cam6: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/602
+
+  # Fence - Camera OD-07
+  fence_cam7: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/702
+
+  # Fence - Camera OD-08
+  fence_cam8: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/802
+
+  # Fence - Camera OD-09
+  fence_cam9: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/902
+
+  # Fence - Camera OD-10
+  fence_cam10: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1002
+
+  # Fence - Camera OD-11
+  fence_cam11: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1102
+
+  # Fence - Camera OD-12
+  fence_cam12: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1202
+
+  # Fence - Camera OD-13
+  fence_cam13: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1302
+
+  # Fence - Camera OD-14
+  fence_cam14: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1402
+
+  # Fence - Camera OD-15
+  fence_cam15: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1502
+
+  # Fence - Camera OD-16
+  fence_cam16: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1602
+
+  # Fence - Camera OD-17
+  fence_cam17: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1702
+
+  # Fence - Camera OD-18
+  fence_cam18: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1802
+
+  # Fence - Camera OD-19
+  fence_cam19: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/1902
+
+  # Fence - Camera OD-20
+  fence_cam20: rtsp://admin:TDK-2025@160.20.123.59:554/Streaming/Channels/2002
+  
+  # Bạn cứ liệt kê tiếp các camera khác ở đây...

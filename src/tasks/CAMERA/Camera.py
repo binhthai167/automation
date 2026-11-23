@@ -18,7 +18,8 @@ from email.mime.base import MIMEBase
 from email import encoders
 import cv2
 import numpy as np
-
+from datetime import datetime, timedelta
+import calendar
 
 # Thresholds (tune as needed)
 DARK_THRESHOLD = 35              # pixel value below this is considered dark
@@ -26,11 +27,13 @@ DARK_PIXEL_RATIO = 0.98         # fraction of dark pixels to consider frame blac
 WHITE_THRESHOLD = 245           # mean above this -> white frame
 STRIPE_VARIATION_RATIO = 0.995   # ratio of stddev of row/col sums to mean -> stripe
 NOISE_LAPLACIAN_THRESH = 200     # minimal laplacian magnitude to count as high-frequency noise
-NOISE_PIXEL_RATIO = 0.05           # fraction of pixels above NOISE_LAPLACIAN_THRESH to consider noisy
+NOISE_PIXEL_RATIO = 0.15           # fraction of pixels above NOISE_LAPLACIAN_THRESH to consider noisy
 
 NG_CAMERAS = []
 SYSTEM_ALERTS = []
 ALL_HDD_STATUS = []
+RETENTION_ALERTS = [] # Danh sách các camera lưu < 365 ngày
+ALL_CAMERA_RETENTION = []
 
 GMAIL_USER = "noreply.nivs@gmail.com"
 GMAIL_APP_PASSWORD = "jjxpgndrikbftwed" 
@@ -45,17 +48,14 @@ def is_black(img):
     dark_ratio = np.count_nonzero(gray < DARK_THRESHOLD) / gray.size
     return dark_ratio >= DARK_PIXEL_RATIO
 
-
 def is_white(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return np.mean(gray) > WHITE_THRESHOLD
-
 
 def is_horizontal_stripe(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     row_sums = gray.sum(axis=1).astype(np.float32)
     return (np.std(row_sums) / (np.mean(row_sums) + 1e-6)) > STRIPE_VARIATION_RATIO
-
 
 def is_vertical_stripe(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -91,7 +91,6 @@ def has_overlay_text(gray):
 
     return False
 
-
 # DARK FRAME DETECTOR (has overlay)
 # ======================
 def is_black_or_no_detail(img):
@@ -107,6 +106,7 @@ def is_black_or_no_detail(img):
 
     # camera thật chỉ coi là 'no detail' khi <1.0
     return sharpness < 1.0
+
 def has_structure(gray):
     h, w = gray.shape
     
@@ -130,49 +130,43 @@ def has_structure(gray):
 def is_too_dark(gray):
     return np.mean(gray) < 20      # NG ngay nếu ảnh tối toàn cục
 
-
 def classify_image(path):
     img = cv2.imread(path)
     if img is None:
-        return {"error": True, "description": "Cannot read image"}
+        return {"error": True, "description": "Lỗi: Không thể đọc file ảnh"}
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # 1. Nếu ảnh quá tối → NG NGAY
-    if is_too_dark(gray):
-        return {"error": True, "description": "Ảnh đen sì"}
+    if is_too_dark(gray): return {"error": True, "description": "Ảnh đen sì"}
+    if is_black(img): return {"error": True, "description": "Ảnh đen (Black)"}
+    if is_white(img): return {"error": True, "description": "Ảnh cháy sáng (White)"}
+    if is_horizontal_stripe(img): return {"error": True, "description": "Sọc ngang (Horizontal stripe)"}
+    if is_vertical_stripe(img): return {"error": True, "description": "Sọc dọc (Vertical stripe)"}
+    if is_noisy(img): return {"error": True, "description": "Nhiễu hạt mạnh (Noisy)"}
+    if is_black_or_no_detail(img): return {"error": True, "description": "Mờ / Mất chi tiết (No detail)"}
 
-    # 3. Các lỗi còn lại → NG
-    if is_black(img) or is_white(img) or is_horizontal_stripe(img) or \
-       is_vertical_stripe(img) or is_noisy(img) or is_black_or_no_detail(img):
-        return {"error": True, "description": ""}
-
-    return {"error": False, "description": ""}
+    return {"error": False, "description": "OK"}
 
 
 class CameraUtility:
     """Xử lý giao tiếp với camera hãng DAHUA"""
     @staticmethod
-    def get_snapshot(base_url, username, password, channel_id, output_path, max_retries=2): # Chỉ cần thử 2 lần là đủ
+    def get_snapshot(base_url, username, password, channel_id, output_path, max_retries=2):
         url = f"{base_url}/cgi-bin/snapshot.cgi?channel={channel_id+1}"
         
         for attempt in range(1, max_retries + 1):
             try:
-                # Timeout giảm xuống một chút để phản ứng nhanh hơn
                 response = requests.get(url, auth=HTTPDigestAuth(username, password), timeout=10)
                 if response.status_code == 200:
                     with open(output_path, "wb") as f:
                         f.write(response.content)
                     return True
-            except Exception as e:
-                pass # Bỏ qua lỗi mạng cục bộ
+            except Exception:
+                pass
                 
-            # Nếu chưa thành công, chỉ nghỉ đúng 2 giây (Không dùng lũy tiến nữa)
             if attempt < max_retries:
-                # print(f"[*] Chụp thử lần {attempt} thất bại. Thử lại sau 2s...") # Tắt print cho đỡ rác màn hình
                 time.sleep(2)
                 
-        # Thất bại chớp nhoáng -> Trả về False để Vòng 1 đẩy nó vào danh sách chờ 5 phút
         return False
 
     @staticmethod
@@ -247,10 +241,98 @@ class CameraUtility:
         except: pass
         return "Offline/Lỗi kết nối"
     
+    @staticmethod
+    def get_oldest_record_days(base_url, username, password, channel_id):
+        """Tìm ngày lưu cũ nhất bằng cơ chế Kiểm tra chéo (Gọng kìm 2 chiều)"""
+        now = datetime.now()
+        session = requests.Session()
+        session.auth = HTTPDigestAuth(username, password)
+        
+        def check_month_data(months_back):
+            target_date = now - timedelta(days=30 * months_back)
+            year = target_date.year
+            month = target_date.month
+            last_day = calendar.monthrange(year, month)[1] 
+            
+            start_time = f"{year}-{month:02d}-01%2000:00:00"
+            end_time = f"{year}-{month:02d}-{last_day}%2023:59:59"
+            
+            found = False
+            d_str = "N/A"
+            days = 0
+            
+            try:
+                # BƯỚC 1: Xin phiên
+                create_url = f"{base_url}/cgi-bin/mediaFileFind.cgi?action=factory.create"
+                res_create = session.get(create_url, timeout=5)
+                match_obj = re.search(r'result=(\d+)', res_create.text)
+                if not match_obj:
+                    return False, "N/A", 0
+                object_id = match_obj.group(1) 
+
+                # BƯỚC 2: Tìm file
+                find_url = (
+                    f"{base_url}/cgi-bin/mediaFileFind.cgi?"
+                    f"action=findFile&object={object_id}&"
+                    f"condition.Channel={channel_id}&"
+                    f"condition.StartTime={start_time}&"
+                    f"condition.EndTime={end_time}&"
+                    f"condition.Types[0]=dav&"
+                    f"condition.Flag[0]=*"
+                )
+                req = requests.Request('GET', find_url)
+                prep = session.prepare_request(req)
+                prep.url = find_url  
+                res_find = session.send(prep, timeout=5)
+
+                # BƯỚC 3: Bóc kết quả
+                if res_find.status_code == 200 and "OK" in res_find.text:
+                    res_next = session.get(f"{base_url}/cgi-bin/mediaFileFind.cgi?action=findNextFile&object={object_id}&count=1", timeout=5)
+                    if "StartTime=" in res_next.text:
+                        match_time = re.search(r'StartTime=(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})', res_next.text)
+                        if match_time:
+                            d_str = match_time.group(1)
+                            old_dt = datetime.strptime(d_str, "%Y-%m-%d %H:%M:%S")
+                            days = (now - old_dt).days
+                            found = True
+
+                # Hủy phiên
+                session.get(f"{base_url}/cgi-bin/mediaFileFind.cgi?action=factory.destroy&object={object_id}", timeout=5)
+            except Exception:
+                pass
+            
+            return found, d_str, days
+
+        forward_date = "N/A"
+        forward_days = 0
+        for m in range(13, -1, -1):
+            found, d_str, days = check_month_data(m)
+            if found:
+                forward_date = d_str
+                forward_days = days
+                break
+
+        backward_date = "N/A"
+        backward_days = 0
+        for m in range(0, 14):
+            found, d_str, days = check_month_data(m)
+            if found:
+                backward_date = d_str
+                backward_days = days
+            else:
+                break
+
+        if abs(forward_days - backward_days) <= 1:
+            return forward_date, forward_days
+        else:
+            print(f"[!] LỆCH DỮ LIỆU KÊNH {channel_id}: Quét tiến {forward_days} ngày | Quét lùi {backward_days} ngày")
+            warning_str = f"{forward_date} (LỆCH! Tiến: {forward_days} ngày | Lùi: {backward_days} ngày)"
+            final_days = max(forward_days, backward_days)
+            return warning_str, final_days
+    
 
 class HikvisionUtility:
     """Xử lý giao tiếp với camera hãng HIKVISION"""
-    
     @staticmethod
     def get_snapshot(base_url, username, password, channel_id, output_path):
         ip_chan = channel_id + 32
@@ -272,23 +354,19 @@ class HikvisionUtility:
             except: 
                 continue
 
-        # --- CÁCH 2: DÙNG RTSP (Đã thêm cơ chế chờ Keyframe) ---
+        # --- CÁCH 2: DÙNG RTSP ---
         ip_address = base_url.replace("http://", "").replace("https://", "").split(":")[0]
         rtsp_channels = [f"{channel_id}02", f"{channel_id}01", f"{ip_chan}02", f"{ip_chan}01"]
         
         for rtsp_chan in rtsp_channels:
             rtsp_url = f"rtsp://{username}:{password}@{ip_address}:554/Streaming/Channels/{rtsp_chan}"
             try:
-                # Thêm cv2.CAP_FFMPEG để ép dùng bộ giải mã chuẩn
                 cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
                 if cap.isOpened():
-                    # ĐỌC BỎ QUA 20 KHUNG HÌNH ĐẦU TIÊN ĐỂ CHỜ ẢNH NÉT (I-FRAME)
                     for _ in range(20):
                         ret, frame = cap.read()
                         if not ret:
                             break
-                    
-                    # Lưu lại khung hình đã ổn định
                     if ret and frame is not None:
                         cv2.imwrite(output_path, frame)
                         cap.release()
@@ -298,11 +376,10 @@ class HikvisionUtility:
                 continue
                 
         return False
+
     @staticmethod
     def get_channel_title_config(base_url, username, password):
-        """Lấy danh sách các kênh, hỗ trợ nhiều đời NVR Hikvision và có cơ chế Failsafe"""
         channels = {}
-        # Thử 2 đường dẫn API phổ biến nhất của Hikvision
         urls_to_try = [
             f"{base_url}/ISAPI/ContentMgmt/InputProxy/channels",
             f"{base_url}/ISAPI/System/Video/inputs/channels"
@@ -312,21 +389,17 @@ class HikvisionUtility:
             try:
                 response = requests.get(url, auth=HTTPDigestAuth(username, password), timeout=10)
                 if response.status_code == 200:
-                    # Đã sửa lỗi Regex ở đây
                     channel_blocks = re.findall(r'<(?:VideoInputChannel|InputProxyChannel)[^>]*>(.*?)</(?:VideoInputChannel|InputProxyChannel)>', response.text, re.DOTALL)
-                    
                     for block in channel_blocks:
                         c_id = re.search(r'<id>(\d+)</id>', block)
                         c_name = re.search(r'<name>(.*?)</name>', block)
                         if c_id and c_name:
                             channels[int(c_id.group(1))] = c_name.group(1).strip()
-                    
                     if channels:
-                        return channels # Nếu lấy được thì trả về luôn
+                        return channels
             except: 
                 pass
                 
-        # --- CƠ CHẾ FAILSAFE ---
         print(f"[*] Không lấy được danh sách tên kênh API. Đang kích hoạt ép chụp ảnh thủ công...")
         for i in range(1, 17): 
             channels[i] = f"Camera {i:02d}"
@@ -375,7 +448,6 @@ class HikvisionUtility:
     
 
 def send_alert_email():
-    # Nếu không có gì để báo cáo thì thôi
     if not ALL_HDD_STATUS and not NG_CAMERAS:
         print("Không có dữ liệu hệ thống để gửi mail.")
         return
@@ -384,15 +456,11 @@ def send_alert_email():
     msg["From"] = GMAIL_USER
     msg["To"] = ", ".join(GMAIL_TO)
     
-    # Tùy biến tiêu đề mail: Có lỗi thì Báo đỏ, Không lỗi thì Báo xanh
-    if NG_CAMERAS or SYSTEM_ALERTS:
-        msg["Subject"] = f"🔴 [CẢNH BÁO] Phát hiện {len(SYSTEM_ALERTS)} NVR lỗi & {len(NG_CAMERAS)} Camera lỗi"
+    if NG_CAMERAS or SYSTEM_ALERTS or RETENTION_ALERTS:
+        msg["Subject"] = f"🔴 [CẢNH BÁO] {len(SYSTEM_ALERTS)} NVR lỗi | {len(NG_CAMERAS)} Cam lỗi | {len(RETENTION_ALERTS)} Cam Hải Quan vi phạm thời gian lưu"
     else:
-        msg["Subject"] = "🟢 [BÁO CÁO] Hệ thống Camera hoạt động bình thường 100%"
+        msg["Subject"] = "🟢 [BÁO CÁO] Hệ thống Camera hoạt động tốt & Đạt chuẩn lưu trữ 365 ngày"
 
-    # ==========================================
-    # XÂY DỰNG GIAO DIỆN BẢNG HTML CHO EMAIL
-    # ==========================================
     html_body = f"""
     <html>
     <head>
@@ -424,17 +492,14 @@ def send_alert_email():
             </tr>
     """
 
-    # Bóc tách chuỗi ALL_HDD_STATUS để điền vào bảng
     if ALL_HDD_STATUS:
         for i, hdd_str in enumerate(ALL_HDD_STATUS):
-            # Dùng regex để tách chuỗi kiểu "[Xưởng] (Hãng) - Info | HDD: detail"
             match = re.match(r'\[(.*?)\]\s+\((.*?)\)\s+-\s+(.*?)\s+\|\s+HDD:\s+(.*)', hdd_str)
             if match:
                 factory, brand, sys_info, hdd_info = match.groups()
             else:
                 factory, brand, sys_info, hdd_info = "Unknown", "Unknown", hdd_str, "Unknown"
 
-            # Phân loại màu sắc (Xanh / Đỏ)
             hdd_class = "status-ng" if "LỖI" in hdd_info.upper() else "status-ok"
             sys_class = "status-ng" if "Offline" in sys_info else "status-ok"
 
@@ -456,7 +521,6 @@ def send_alert_email():
         <h3>2. DANH SÁCH CAMERA MẤT HÌNH ẢNH (NG)</h3>
     """
 
-    # Bảng danh sách Camera lỗi
     if NG_CAMERAS:
         html_body += """
         <table>
@@ -484,16 +548,53 @@ def send_alert_email():
         html_body += """<p class="status-ok" style="font-size: 16px;">✅ Tuyệt vời! Tất cả camera đều hiển thị hình ảnh bình thường, không phát hiện nhiễu hay sọc đen.</p>"""
 
     html_body += """
+        <h3>3. TÌNH TRẠNG LƯU TRỮ DỮ LIỆU Ở CAM HẢI QUAN (MỤC TIÊU: 365 NGÀY)</h3>
+    """
+    
+    if ALL_CAMERA_RETENTION: 
+        html_body += """
+        <table>
+            <tr>
+                <th width="5%">STT</th>
+                <th width="20%">Tên Xưởng</th> <th width="20%">Tên camera</th>
+                <th width="25%">Thời điểm dữ liệu cũ nhất hiện còn lưu được</th>
+                <th width="15%">Số ngày lưu thực tế hiện tại</th>
+                <th width="15%">Đánh giá</th>
+            </tr>
+        """
+        for i, item in enumerate(ALL_CAMERA_RETENTION):
+            factory_name = item.get('Xưởng', 'Unknown')
+            camera_name = item.get('Kênh', 'Unknown')
+            oldest_date = item.get('Cũ nhất', 'Unknown')
+            days_retained = item.get('Số ngày', 0)
+            
+            if days_retained >= 365:
+                eval_text = "ĐẠT"
+                eval_class = "status-ok"
+            else:
+                eval_text = "KHÔNG ĐẠT"
+                eval_class = "status-ng"
+
+            html_body += f"""
+            <tr>
+                <td align="center">{i+1}</td>
+                <td><b>{factory_name}</b></td>
+                <td><b>{camera_name}</b></td>
+                <td align="center">{oldest_date}</td>
+                <td align="center" class="{eval_class}"><b>{days_retained} ngày</b></td>
+                <td align="center" class="{eval_class}"><b>{eval_text}</b></td>
+            </tr>
+            """
+        html_body += "</table>"
+    else:
+        html_body += """<p>Không có dữ liệu lưu trữ của camera để hiển thị.</p>"""
+    html_body += """
     </body>
     </html>
     """
 
-    # Đính kèm nội dung HTML vào Mail
     msg.attach(MIMEText(html_body, "html"))
 
-    # ==========================================
-    # PHẦN 3: ĐÍNH KÈM ẢNH CAMERA LỖI (Giữ nguyên)
-    # ==========================================
     for item in NG_CAMERAS:
         if item.get('path') and os.path.exists(item['path']):
             try:
@@ -505,7 +606,6 @@ def send_alert_email():
                 msg.attach(part)
             except: pass
 
-    # Gửi mail
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
@@ -514,25 +614,51 @@ def send_alert_email():
     except Exception as e:
         print(f"\n>>> Lỗi khi gửi email: {e}")
 
+# =========================================================================
+# HÀM SUY LUẬN NGUYÊN NHÂN & HƯỚNG KHẮC PHỤC (Dựa trên hiện tượng)
+# =========================================================================
+def get_cause_and_solution(error_desc):
+    error = error_desc.lower()
+    if "đen" in error or "black" in error:
+        return "Mất hồng ngoại ban đêm, sụt nguồn cấp hoặc cảm biến ảnh lỗi", "Kiểm tra nguồn cấp 12V/PoE, vệ sinh ống kính, che chắn ánh sáng ngược"
+    elif "sọc" in error or "stripe" in error or "nhiễu" in error or "noisy" in error:
+        return "Nhiễu tín hiệu, cáp mạng kém chất lượng hoặc đầu bóp cáp lỏng", "Kiểm tra lại đường dây cáp, bấm lại đầu mạng RJ45, cách ly nguồn nhiễu điện"
+    elif "mờ" in error or "chi tiết" in error:
+        return "Ống kính bị bám bụi bẩn, đọng hơi nước sương mù", "Vệ sinh mặt kính bên ngoài bề mặt camera"
+    elif "trắng" in error or "cháy sáng" in error or "white" in error:
+        return "Ngược sáng cực mạnh hoặc lỗi cảm biến đo sáng", "Điều chỉnh lại góc quay tránh ánh sáng trực tiếp, bật WDR/BLC"
+    elif "mất kết nối" in error or "offline" in error or "timeout" in error:
+        return "Đứt cáp mạng, lỏng cáp, Switch cấp mạng/PoE treo hoặc mất điện", "Kiểm tra đèn tín hiệu ở Switch, đo thông mạch cáp mạng, khởi động lại Switch"
+    elif "hdd" in error or "ổ cứng" in error or "error" in error:
+        return "Lỗi phần cứng ổ đĩa, cáp SATA lỏng hoặc Bad Sector", "Kiểm tra cáp kết nối ổ cứng trong NVR, format hoặc thay thế HDD mới"
+    else:
+        return "Lỗi phần cứng hoặc đường truyền", "Kiểm tra thực tế tại hiện trường, khởi động lại thiết bị"
+
 
 def main():
-    # Thư mục chứa dữ liệu
     base_data_dir = r"D:\Automation\src\tasks\CAMERA\data"
     snapshot_dir = r"D:\Automation\src\tasks\CAMERA\data\snapshots"
     os.makedirs(snapshot_dir, exist_ok=True)
 
-    # Khởi tạo Excel
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     sheet.title = "Camera Analysis"
     sheet.append(["Khu vực/Xưởng", "Tên Kênh", "Trạng Thái", "Thông tin HDD (Sức khỏe)", "Hệ thống", "Mô tả lỗi", "Ảnh minh họa"])
+    
+    log_sheet = workbook.create_sheet(title="Sổ Nhật Ký HQ")
+    log_sheet.append([
+        "Thời gian phát hiện", 
+        "Khu vực / Xưởng", 
+        "Thiết bị (NVR / Kênh)", 
+        "Phân loại Lỗi", 
+        "Hiện tượng (Tool ghi nhận)", 
+        "Nguyên nhân (Kỹ thuật điền)", 
+        "Biện pháp khắc phục", 
+        "Trạng thái"
+    ])
 
-    # DANH SÁCH TẠM GIAM: Chứa các camera chụp thất bại ở Vòng 1
     SUSPICIOUS_CAMERAS = [] 
 
-    # =========================================================================
-    # VÒNG 1: QUÉT NHANH TOÀN BỘ HỆ THỐNG
-    # =========================================================================
     print("=== BẮT ĐẦU VÒNG 1: QUÉT HỆ THỐNG DAHUA ===")
     camera_info_path = os.path.join(base_data_dir, "CameraInfo.txt")
     if os.path.exists(camera_info_path):
@@ -549,37 +675,66 @@ def main():
                 sheet.append([factory_name, "DEVICE_ROOT", "INFO", hdd_text, sys_info, "Thông tin đầu ghi", ""])
 
                 channel_info = CameraUtility.get_channel_title_config(base_url, username, password)
+
                 if not channel_info: continue
+                TARGET_NVRS = ["http://101.99.46.50:8085", "http://101.99.46.50:8090"]
+                current_url = base_url.strip().lower()
 
                 for channel_id, channel_name in channel_info.items():
                     if "not in use" in channel_name.lower(): continue
+                    if current_url in TARGET_NVRS:
+                        search_id = channel_id
+                        if current_url == "http://101.99.46.50:8090":
+                            search_id = channel_id + 1 
+                        oldest_date, retained_days = CameraUtility.get_oldest_record_days(base_url, username, password, search_id)
+                        ALL_CAMERA_RETENTION.append({
+                            "Xưởng": factory_name, 
+                            "Kênh": channel_name,   
+                            "Cũ nhất": oldest_date,
+                            "Số ngày": retained_days
+                        })
+                        if retained_days < 365:
+                            RETENTION_ALERTS.append({
+                                "Xưởng": factory_name,
+                                "Kênh": channel_name,
+                                "Cũ nhất": oldest_date,
+                                "Số ngày": retained_days
+                            })
+
                     snapshot_path = os.path.join(snapshot_dir, f"{factory_name}_{channel_id}.jpg")
-                    
-                    # CỐ GẮNG CHỤP VÀ ĐÁNH GIÁ (VÒNG 1)
-                    if CameraUtility.get_snapshot(base_url, username, password, channel_id, snapshot_path):
-                        # TRƯỜNG HỢP 1: KẾT NỐI ĐƯỢC -> KIỂM TRA AI
-                        result = classify_image(snapshot_path)
+                    if os.path.exists(snapshot_path):
+                        os.remove(snapshot_path)
                         
+                    # ==================================
+                    # CỐ GẮNG CHỤP VÀ ĐÁNH GIÁ DAHUA
+                    # ==================================
+                    if CameraUtility.get_snapshot(base_url, username, password, channel_id, snapshot_path):
+                        result = classify_image(snapshot_path)
                         if not result["error"]:
-                            # Tốt -> Ghi Excel OK
                             sheet.append([factory_name, channel_name, "OK", "-", "-", "", ""])
-                            # (Đoạn chèn ảnh vào Excel giữ nguyên...)
                         else:
-                            # LỖI AI (Đen/Sọc/Nhiễu) -> CHỐT LỖI NG NGAY LẬP TỨC
                             print(f"[-] LỖI AI: {factory_name} - {channel_name} ({result['description']})")
                             sheet.append([factory_name, channel_name, "NG", "-", "-", result["description"], ""])
-                            # Đưa thẳng vào danh sách gửi mail cho sếp
                             NG_CAMERAS.append({
                                 "path": snapshot_path, 
                                 "Xưởng": factory_name, 
                                 "Kênh": channel_name, 
                                 "reason": result["description"]
                             })
+                            
+                        # Chèn ảnh cho DAHUA
+                        current_row = sheet.max_row
+                        try:
+                            img = Image(snapshot_path)
+                            img.width, img.height = 240, 135
+                            sheet.add_image(img, f"G{current_row}")
+                            sheet.column_dimensions["G"].width = img.width / 7
+                            sheet.row_dimensions[current_row].height = img.height
+                        except: pass
                     else:
-                        # TRƯỜNG HỢP 2: LỖI KẾT NỐI -> ĐƯA VÀO DIỆN NGHI NGỜ ĐỂ ĐỢI 5 PHÚT
                         print(f"[?] MẤT KẾT NỐI: {factory_name} - {channel_name} -> Chờ kiểm tra lại sau 5p")
                         SUSPICIOUS_CAMERAS.append({
-                            "brand": "Dahua", # Hoặc "Hikvision" tùy vòng lặp
+                            "brand": "Dahua", 
                             "factory": factory_name, 
                             "url": base_url, 
                             "user": username, 
@@ -610,100 +765,211 @@ def main():
                 for channel_id, channel_name in channel_info.items():
                     if "not in use" in channel_name.lower(): continue
                     snapshot_path = os.path.join(snapshot_dir, f"HIK_{factory_name}_{channel_id}.jpg")
-                    
-                    # CỐ GẮNG CHỤP VÀ ĐÁNH GIÁ (VÒNG 1)
+                    if os.path.exists(snapshot_path):
+                        os.remove(snapshot_path)
+                        
+                    # ==================================
+                    # CỐ GẮNG CHỤP VÀ ĐÁNH GIÁ HIKVISION
+                    # ==================================
                     if HikvisionUtility.get_snapshot(base_url, username, password, channel_id, snapshot_path):
                         result = classify_image(snapshot_path)
                         if not result["error"]:
-                            # CAMERA TỐT -> Ghi Excel luôn
                             print(f"{factory_name} - {channel_name}: OK")
                             sheet.append([factory_name, channel_name, "OK", "-", "-", "", ""])
-                            current_row = sheet.max_row
-                            try:
-                                img = Image(snapshot_path)
-                                img.width, img.height = 240, 135
-                                sheet.add_image(img, f"G{current_row}")
-                                sheet.column_dimensions["G"].width = img.width / 7
-                                sheet.row_dimensions[current_row].height = img.height
-                            except: pass
                         else:
-                            # LỖI AI (Đen/Sọc/Nhiễu) -> CHỐT LỖI NG NGAY LẬP TỨC
                             print(f"[-] LỖI AI: {factory_name} - {channel_name} ({result['description']})")
                             sheet.append([factory_name, channel_name, "NG", "-", "-", result["description"], ""])
-                            # Đưa thẳng vào danh sách gửi mail cho sếp
                             NG_CAMERAS.append({
                                 "path": snapshot_path, 
                                 "Xưởng": factory_name, 
                                 "Kênh": channel_name, 
                                 "reason": result["description"]
                             })
+
+                        # Chèn ảnh cho HIKVISION
+                        current_row = sheet.max_row
+                        try:
+                            img = Image(snapshot_path)
+                            img.width, img.height = 240, 135
+                            sheet.add_image(img, f"G{current_row}")
+                            sheet.column_dimensions["G"].width = img.width / 7
+                            sheet.row_dimensions[current_row].height = img.height
+                        except: pass
                     else:
-                        # MẤT MẠNG -> Đưa vào diện nghi ngờ
                         print(f"[?] NGHI NGỜ: {factory_name} - {channel_name} (Mất kết nối)")
                         SUSPICIOUS_CAMERAS.append({"brand": "Hikvision", "factory": factory_name, "url": base_url, "user": username, "pass": password, "id": channel_id, "name": channel_name, "path": snapshot_path})
 
-    # =========================================================================
-    # THỜI GIAN TRỄ LŨY TIẾN (Đợi mạng phục hồi)
-    # =========================================================================
+
     if SUSPICIOUS_CAMERAS:
         print("\n==========================================================")
         print(f"[*] CẢNH BÁO: Phát hiện {len(SUSPICIOUS_CAMERAS)} camera có dấu hiệu NG.")
-        print("[*] Đang kích hoạt cơ chế chờ 5 phút (300 giây) để mạng phục hồi...")
+        print("[*] Kích hoạt cơ chế theo dõi liên tục trong 30 phút (Check mỗi 1 phút)...")
         print("==========================================================")
-        time.sleep(300) # Nghỉ 5 phút chẵn
-
-        # =========================================================================
-        # VÒNG 2: CHỐT HẠ (Xác nhận chết hay đã sống lại)
-        # =========================================================================
-        print("\n=== BẮT ĐẦU VÒNG 2: KIỂM TRA LẠI CAMERA NGHI NGỜ ===")
-        for cam in SUSPICIOUS_CAMERAS:
-            print(f"Re-checking {cam['factory']} - {cam['name']}...")
+        
+        still_suspicious = SUSPICIOUS_CAMERAS.copy()
+        max_retries = 30 
+        
+        for attempt in range(1, max_retries + 1):
+            if not still_suspicious:
+                print("\n[+] Tuyệt vời! Toàn bộ camera nghi ngờ đều đã phục hồi mạng.")
+                break 
+                
+            print(f"\n[*] Lần thử {attempt}/{max_retries} (Đang chờ 1 phút trước khi check...)")
+            time.sleep(60) 
             
-            # Khởi tạo mặc định
-            is_success = False
-            final_reason = ""
-            
-            # Gọi lệnh chụp ảnh lần nữa
-            if cam["brand"] == "Dahua":
-                success_snap = CameraUtility.get_snapshot(cam["url"], cam["user"], cam["pass"], cam["id"], cam["path"])
-            else:
-                success_snap = HikvisionUtility.get_snapshot(cam["url"], cam["user"], cam["pass"], cam["id"], cam["path"])
-
-            # Đánh giá kết quả Vòng 2
-            if success_snap:
-                result = classify_image(cam["path"])
-                if not result["error"]:
-                    is_success = True
+            failed_this_attempt = []
+            for cam in still_suspicious:
+                print(f"Re-checking {cam['factory']} - {cam['name']}...")
+                is_success = False
+                final_reason = ""
+                
+                if cam["brand"] == "Dahua":
+                    success_snap = CameraUtility.get_snapshot(cam["url"], cam["user"], cam["pass"], cam["id"], cam["path"])
                 else:
-                    final_reason = result["description"]
-            else:
-                final_reason = "Mất kết nối/Timeout (Đã rớt mạng > 5 phút)"
+                    success_snap = HikvisionUtility.get_snapshot(cam["url"], cam["user"], cam["pass"], cam["id"], cam["path"])
 
-            # RA QUYẾT ĐỊNH CUỐI CÙNG
-            if is_success:
-                print(f"-> ✅ ĐÃ PHỤC HỒI MẠNG: {cam['factory']} - {cam['name']}")
-                sheet.append([cam["factory"], cam["name"], "OK", "-", "-", "Đã phục hồi sau khi rớt mạng", ""])
+                if success_snap:
+                    result = classify_image(cam["path"])
+                    if not result["error"]:
+                        is_success = True
+                    else:
+                        final_reason = result["description"]
+                else:
+                    final_reason = "Mất kết nối/Timeout (Chưa phục hồi)"
+
+                if is_success:
+                    print(f"-> ✅ ĐÃ PHỤC HỒI MẠNG: {cam['factory']} - {cam['name']}")
+                    sheet.append([cam["factory"], cam["name"], "OK", "-", "-", f"Đã phục hồi sau {attempt} phút rớt mạng", ""])
+                    current_row = sheet.max_row
+                    try:
+                        img = Image(cam["path"])
+                        img.width, img.height = 240, 135
+                        sheet.add_image(img, f"G{current_row}")
+                        sheet.column_dimensions["G"].width = img.width / 7
+                        sheet.row_dimensions[current_row].height = img.height
+                    except: pass
+                else:
+                    print(f"-> ⏳ VẪN CHƯA PHỤC HỒI: {cam['factory']} - {cam['name']} ({final_reason})")
+                    cam["last_reason"] = final_reason 
+                    failed_this_attempt.append(cam) 
+                    
+            still_suspicious = failed_this_attempt
+            
+        if still_suspicious:
+            print("\n=== ĐÃ HẾT 30 PHÚT THEO DÕI. CHỐT KẾT QUẢ CÁC CAMERA CHẾT THẬT SỰ ===")
+            for cam in still_suspicious:
+                reason = cam.get("last_reason", "Mất kết nối (Đã rớt mạng > 30 phút)")
+                print(f"-> ☠️ CHẾT THẬT SỰ: {cam['factory']} - {cam['name']} ({reason})")
+                
+                sheet.append([cam["factory"], cam["name"], "NG", "-", "-", f"{reason} (Kéo dài > 30p)", ""])
                 current_row = sheet.max_row
                 try:
                     img = Image(cam["path"])
                     img.width, img.height = 240, 135
                     sheet.add_image(img, f"G{current_row}")
-                except: pass
-            else:
-                print(f"-> ❌ CHẾT THẬT SỰ: {cam['factory']} - {cam['name']} ({final_reason})")
-                sheet.append([cam["factory"], cam["name"], "NG", "-", "-", final_reason, ""])
-                current_row = sheet.max_row
-                try:
-                    img = Image(cam["path"])
-                    img.width, img.height = 240, 135
-                    sheet.add_image(img, f"G{current_row}")
+                    sheet.column_dimensions["G"].width = img.width / 7
+                    sheet.row_dimensions[current_row].height = img.height
                 except: pass
                 
-                # CHỈ ĐƯA VÀO DANH SÁCH GỬI MAIL KHI ĐÃ THẤT BẠI Ở VÒNG 2
-                NG_CAMERAS.append({"path": cam["path"] if os.path.exists(cam["path"]) else None, "Xưởng": cam["factory"], "Kênh": cam["name"], "reason": final_reason})
+                NG_CAMERAS.append({
+                    "path": cam["path"] if os.path.exists(cam["path"]) else None, 
+                    "Xưởng": cam["factory"], 
+                    "Kênh": cam["name"], 
+                    "reason": f"{reason} (> 30 phút)"
+                })
 
     # =========================================================================
-    # LƯU EXCEL VÀ GỬI MAIL
+    # GHI DỮ LIỆU VÀO SHEET 2 (SỔ NHẬT KÝ HẢI QUAN CÓ TÍNH NĂNG NHỚ TRẠNG THÁI)
+    # =========================================================================
+    current_time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    processed_hq_cams = set() 
+    
+    # --- ĐỌC BỘ NHỚ LỊCH SỬ (Tình trạng camera của ngày hôm qua) ---
+    history_file = os.path.join(base_data_dir, "hq_camera_history.json")
+    old_history = {}
+    if os.path.exists(history_file):
+        try:
+            with open(history_file, "r", encoding="utf-8") as f:
+                old_history = json.load(f)
+        except: pass
+        
+    new_history = {} 
+
+    # 1. Ghi nhận LỖI LỚN TỪ HỆ THỐNG
+    for alert in SYSTEM_ALERTS:
+        if "8085" in alert or "8090" in alert or "Hai Quan" in alert:
+            factory_extract = alert.split(']')[0].replace('[', '') if '[' in alert else "Hai Quan"
+            cause, solution = get_cause_and_solution(alert)
+            log_sheet.append([
+                current_time_str, factory_extract, "Hệ thống NVR Hải Quan", 
+                "Lỗi lớn", alert, cause, solution, "" 
+            ])
+
+    # 2. Đọc danh sách TOÀN BỘ camera từ Sheet 1 để đưa sang Sổ Nhật Ký
+    for row in list(sheet.rows)[1:]: 
+        factory_name = str(row[0].value)
+        channel_name = str(row[1].value)
+        status = str(row[2].value)
+        error_desc = str(row[5].value)
+
+        if channel_name == "DEVICE_ROOT":
+            continue
+
+        if "Hai Quan" in factory_name:
+            cam_key = f"{factory_name}_{channel_name}"
+            processed_hq_cams.add(cam_key) 
+            
+            old_status = old_history.get(cam_key, "OK")
+            
+            if status == "OK":
+                new_history[cam_key] = "OK" 
+                if old_status != "OK":
+                    log_sheet.append([
+                        current_time_str, factory_name, channel_name,
+                        "Bình thường", "✅ Đã khắc phục xong (Camera lên hình lại)", 
+                        "Thiết bị đã trực tuyến và rõ nét", "-", ""
+                    ])
+                else:
+                    log_sheet.append([
+                        current_time_str, factory_name, channel_name,
+                        "Bình thường", "Hoạt động tốt", "-", "-", ""
+                    ])
+                    
+            elif status == "NG":
+                new_history[cam_key] = "NG" 
+                desc = error_desc if error_desc and error_desc != "-" else "Lỗi hình ảnh"
+                cause, solution = get_cause_and_solution(desc)
+                log_sheet.append([
+                    current_time_str, factory_name, channel_name,
+                    "Lỗi nhỏ", desc, cause, solution, ""
+                ])
+
+    # 3. Bổ sung các camera Hải Quan bị mất kết nối mạng hoàn toàn 
+    for cam in SUSPICIOUS_CAMERAS:
+        factory_name = cam.get("factory", "Unknown")
+        channel_name = cam.get("name", "Unknown")
+        
+        if "Hai Quan" in factory_name:
+            cam_key = f"{factory_name}_{channel_name}"
+            if cam_key not in processed_hq_cams:
+                new_history[cam_key] = "NG" 
+                cause, solution = get_cause_and_solution("Mất kết nối mạng")
+                log_sheet.append([
+                    current_time_str, factory_name, channel_name,
+                    "Lỗi nhỏ", "Mất kết nối mạng / Không thể chụp ảnh",
+                    cause, solution, ""
+                ])
+                processed_hq_cams.add(cam_key)
+
+    # --- LƯU LẠI BỘ NHỚ CHO NGÀY MAI ---
+    try:
+        with open(history_file, "w", encoding="utf-8") as f:
+            json.dump(new_history, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Lỗi lưu lịch sử HQ: {e}")
+
+    # =========================================================================
+    # LƯU EXCEL TỔNG VÀ GỬI MAIL
     # =========================================================================
     current_date = datetime.now().strftime("%Y%m%d")
     output_path = fr"N:\Ｃ：ＮＩＶＳ総務・人事(GA&HR)\０４：ＩＴ\１７：RPA Report\1. Camera\CameraAnalysis_{current_date}.xlsx"
